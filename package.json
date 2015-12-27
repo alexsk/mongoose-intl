@@ -1,0 +1,33 @@
+{
+  "name": "mongoose-intl",
+  "version": "1.0.0",
+  "description": "Mongoose schema plugin for multilingual fields",
+  "main": "lib/mongoose-intl.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "mongoose": "~4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexsk/mongoose-intl.git"
+  },
+  "keywords": [
+    "mongoose",
+    "intl",
+    "i18n",
+    "l10n",
+    "internationalization",
+    "localization"
+  ],
+  "author": {
+    "name": "Alex Skorichenko",
+    "url": "https://github.com/alexsk"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexsk/mongoose-intl/issues"
+  },
+  "homepage": "https://github.com/alexsk/mongoose-intl#readme"
+}
