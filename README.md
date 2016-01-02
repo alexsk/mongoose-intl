@@ -106,7 +106,7 @@ BlogPostModel.findById('some id', function (err, post) {
   post.get('title.de'); // 'Another German title'
   
   post.get('title.all'); // { en: 'Title on default language', de: 'Another German title', fr: 'French title' }
-})
+});
 
 ```
 
@@ -115,7 +115,7 @@ BlogPostModel.findById('some id', function (err, post) {
 The main `intl`-field defined as a virtual, and it will not be returned by `toJSON/toObject` methods which are used during the document conversion to JSON or object.
 So you'll get the following result be default:
 ```js
-console.log(post);
+console.log(post.toJSON());
 
 {
     _id: '...',
@@ -124,7 +124,7 @@ console.log(post);
         de: 'Another German title',
         fr: 'French title'
     },
-    post: {
+    body: {
         en: '...',
         de: '...',
         fr: '...'
@@ -146,12 +146,12 @@ var BlogPost = new Schema({
 
 ....
 
-console.log(post);
+console.log(post.toJSON());
 
 {
     _id: '...',
     title: 'Title on default language',
-    post: '...'
+    body: '...'
 }
 ```
 
