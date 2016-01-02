@@ -155,6 +155,33 @@ console.log(post.toJSON());
 }
 ```
 
+### Schema language methods
+
+The plugins adds couple language methods to the schema:
+* `getLanguages()` - returns an array of available languages
+* `getDefaultLanguage()` - returns current default language
+* `setDefaultLanguage(lang)` - changes default language to a new one, the value should be equal to the one of available languages
+
+Usage examples:
+
+```js
+BlogPostModel.findById('some id', function (err, post) {
+  if (err) return handleError(err);
+  
+  console.log(post.toJSON()); // { _id: '...', title: 'Title on default language', body: '...' }
+  
+  post.getLanguages(); // [ 'en', 'de', 'fr' ]
+  post.getDefaultLanguage(); // 'en'
+  
+  post.setDefaultLanguage('de');
+  console.log(post.toJSON()); // { _id: '...', title: 'Another German title', body: '...' }
+  
+});
+
+```
+
+*Note:* languages settings are set on schema level, it means that in case you have couple models using the same schema or just several documents based on the same model, changing language setting on one of them will be applied to all others.
+
 ### Intl-based String type options
 
 [`default`](http://mongoosejs.com/docs/api.html#schematype_SchemaType-default) and [`required`](http://mongoosejs.com/docs/api.html#schematype_SchemaType-required) options are applied to the default language field only.
