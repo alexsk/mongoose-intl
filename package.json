@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "mongoose": "4 - 4.11.4"
+    "mongoose": "~4"
   },
   "repository": {
     "type": "git",
