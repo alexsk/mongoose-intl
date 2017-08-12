@@ -68,7 +68,7 @@ mongoose.plugin(mongooseIntl, { languages: ['en', 'de', 'fr'], defaultLanguage: 
 `intl`-enabled field is converted to a virtual path and continue interacting as a string, not an object.
 It means that you can read it and write to it any string, and it will be stored under default language setting.
 
-Other languages values can be set by using `model.set()` method. All values can be set together as an object, just use `field.all` as a path in `model.set()` method. See examples below. 
+Other languages values can be set by using `model.set()` method. Pass an object with multiple languages instead of the string to set all values together. See examples below. 
 
 Multilingual fields can be set with 3 ways:
 
@@ -81,10 +81,11 @@ post.title = 'Title on default language'; // default language definition, will b
 
 post.set('title.de', 'German title'); // any other language value definition
 
-post.set('title.all', { // defines all languages in one call using an object
+post.title = { // defines all languages in one call using an object
+    en: 'Title on default language',
     de: 'Another German title',
     fr: 'French title'
-});
+};
 
 post.save(function (err) {
     if (err) return handleError(err);
@@ -103,9 +104,7 @@ BlogPostModel.findById('some id', function (err, post) {
   
   post.title; // 'Title on default language'
   
-  post.get('title.de'); // 'Another German title'
-  
-  post.get('title.all'); // { en: 'Title on default language', de: 'Another German title', fr: 'French title' }
+  post.get('title.de'); // 'Another German title'  
 });
 
 ```
@@ -287,6 +286,25 @@ var BlogPost = new Schema({
 All others options and validators (e.g. `lowercase`, `uppercase`, `trim`, `minlength`, `maxlength`, `match`, etc.) will be used for all languages.
 But please be careful with some of them like `enum` which may not be relevant for multilingual text fields, and indexes which will be added for all fields as well.
 
+## Upgrading from v2.x to v3.x
+
+`v3.x` drops support of `field.all` get/set methods. Virtual paths with the dots inside are not ignored since Mongoose v4.11.5 (see [#5473](https://github.com/Automattic/mongoose/issues/5473)). And `field.all` overrides `field` value which is not expected.
+TO set values, instead of
+```js
+post.set('title.all', {
+    en: '...',
+    de: '...'
+});
+```
+use
+```js
+post.title = {
+    en: '...',
+    de: '...'
+};
+```
+
+To read the entire language document or the current language only, disable or enable virtuals for `toJSON/toObject` methods.
 ## Upgrading from v1.x to v2.x
 
 `v2.x` version has incompatible API updates for Mongoose document language methods:
