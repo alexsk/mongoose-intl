@@ -40,8 +40,9 @@ mongoose.plugin(mongooseIntl, { languages: ['en', 'de', 'fr'], defaultLanguage: 
 
 ### Plugin options
 
-* languages - required, array with languages, suggested to use 2- or 3-letters language codes using [ISO 639 standard](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-* defaultLanguage - optional, if omitted the first value from `languages` array will be used as a default language
+* `languages` - required, array with languages, suggested to use 2- or 3-letters language codes using [ISO 639 standard](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+* `defaultLanguage` - optional, if omitted the first value from `languages` array will be used as a default language
+* `fallback` - when `true`, another translation is returned for fields that are not available in the currently selected language, chosen according to the order of the `languages` option (default: `false`, i.e. fields with missing translation are returned as `null`)
 
 ### Database representation
 
