@@ -29,19 +29,20 @@ var BlogPost = new Schema({
 Adding plugin to the schema:
 
 ```js
-BlogPost.plugin(mongooseIntl, { languages: ['en', 'de', 'fr'], defaultLanguage: 'en' });
+BlogPost.plugin(mongooseIntl, { languages: ['en', 'de', 'fr'], defaultLanguage: 'en', defaultLanguageAsFallback: false });
 ```
 
 or it can be defined as a global plugin which will be applied to all schemas:
 
 ```js
-mongoose.plugin(mongooseIntl, { languages: ['en', 'de', 'fr'], defaultLanguage: 'en' });
+mongoose.plugin(mongooseIntl, { languages: ['en', 'de', 'fr'], defaultLanguage: 'en', defaultLanguageAsFallback: false });
 ```
 
 ### Plugin options
 
 * languages - required, array with languages, suggested to use 2- or 3-letters language codes using [ISO 639 standard](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-* defaultLanguage - optional, if omitted the first value from `languages` array will be used as a default language
+* defaultLanguage - optional, if omitted the first value from `languages` array will be used as the default plugin language
+* defaultLanguageAsFallback - optional, disabled if omitted, allow to use the `defaultLanguage` as virtual getter fallback in case the value does not exist for the current language
 
 ### Database representation
 
